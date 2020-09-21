@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <grid name="contact-grid" title="Contacts"
+    model="com.axelor.myclientcontactlist.db.Myclientcontactlist"> 
+    <field name="fullName" />
+    <field name="phone" />
+  </grid>
+
+  <form name="contact-form" title="Contact" model="com.axelor.myclientcontactlist.db.Myclientcontactlist"> 
+    
+    <panel title="Overview"> 
+    
+	<!-- button name="googleMapsLocation" title="Maps" showTitle="true" onClick="print.sale.order" icon="fa-print" -->    
+	
+      <field name="fullName" readonly="false">
+        <editor> 
+          <field name="title" colSpan="3"/>
+          <field name="firstName" colSpan="4"/>
+          <field name="lastName" colSpan="5"/>
+          <field name="googleMapsLocation" colSpan="4"/>
+        </editor>
+      </field>
+
+      <field name="phone">
+        <viewer><![CDATA[
+        <a href="tel:{{record.phone}}">{{record.phone}}</a>
+        ]]></viewer>
+      </field>
+
+	<field name="googleMapsLocation">
+		<viewer><![CDATA[
+        <a href="www.googlemaps.addopengooglemapsvialocationurlhere/location"> Maps Location </a>
+        ]]></viewer>
+	</field>
+      
+    </panel>
+    
+    
+
+    <panel-related field="addresses" 
+      form-view="address-form-popup"> 
+        <field name="street"/>
+        <field name="area"/>
+        <field name="city"/>
+        <field name="state"/>
+        <field name="zip"/>
+        <field name="country"/>
+    </panel-related>
+    
+    <panel sidebar="true"> 
+      <field name="createdOn"/>
+      <field name="createdBy"/>
+      <field name="updatedOn"/>
+      <field name="updatedBy"/>
+    </panel>
+    
+    
+  </form>
+
+  <form name="address-form-popup" title="Address"
+    model="com.axelor.myclientcontactlist.db.Address">
+    <panel title="Overview">
+      <field name="street" />
+      <field name="area" />
+      <field name="city" />
+      <field name="zip" />
+      <field name="state" />
+      <field name="country" />
+    </panel>
+  </form>
+
+</object-views>
